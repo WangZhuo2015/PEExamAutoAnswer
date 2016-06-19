@@ -19,6 +19,7 @@ class ViewController: NSViewController,AutoAnswerDelegate {
     @IBOutlet weak var uidText: NSTextField!
     var model = Model.model
     override func viewDidLoad() {
+        model.delegate = self
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }

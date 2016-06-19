@@ -128,13 +128,22 @@ class Model {
             do{
                 let json = try NSJSONSerialization.JSONObjectWithData( response.data! , options: .MutableContainers) as! NSDictionary
                 let result = ExamDataAPIBase(fromDictionary: json)
+                guard result.isAllowExam == true else{
+                    throw ExamError.error(result.message)
+                }
                 self.paperID = result.examPaperId
                 completeHandle(data: result)
+            }
+            catch ExamError.error(let message){
+                self.delegate?.printLog(message)
             }catch{
                 print("error")
                 fatalError()
             }
         }
+    }
+    enum ExamError: ErrorType {
+        case error(String)
     }
     
     
