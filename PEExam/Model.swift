@@ -39,7 +39,7 @@ class Model {
                 dispatch_after(delay, dispatch_get_main_queue()) {
                     Alamofire.Manager.sharedInstance.request(.GET,URL, parameters: ["selectOptions":answer,"token":token,"uid":uid], encoding: .URL, headers: [:])
                         .validate(statusCode: 200...300).responseJSON(completionHandler: { (response) in
-                            self.delegate?.printLog(String(data: response.data!, encoding: NSUTF8StringEncoding)!)
+                            //self.delegate?.printLog(String(data: response.data!, encoding: NSUTF8StringEncoding)!)
                             let json = try! NSJSONSerialization.JSONObjectWithData( response.data!, options: .MutableContainers) as! NSDictionary
                             guard QuestionRes(fromDictionary: json).isSuccess! else{
                                 self.delegate?.printLog("提交失败")
